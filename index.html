@@ -434,17 +434,57 @@
     .header-left {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
     }
 
     .mobile-menu-toggle {
       display: none;
-      background: none;
-      border: none;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       color: var(--text-main);
-      font-size: 20px;
+      font-size: 16px;
       cursor: pointer;
-      padding: 8px;
+      padding: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .mobile-menu-toggle:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .header-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 38px;
+      padding: 0 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-back-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .header-back-btn.hidden {
+      display: none;
     }
 
     .header-breadcrumb-badge {
@@ -459,6 +499,11 @@
       font-weight: 700;
       color: var(--text-main);
       box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+
+    .header-breadcrumb-badge:hover {
+      border-color: var(--primary);
     }
 
     .header-breadcrumb-badge i {
@@ -1856,6 +1901,95 @@
       }
     }
 
+    /* Sidebar Overlay for Mobile Backdrop */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sidebar-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar-close-btn {
+      display: none;
+      margin-left: auto;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-color);
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      color: var(--text-muted);
+      font-size: 16px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .sidebar-close-btn:hover {
+      color: var(--danger);
+      background: var(--danger-light);
+      border-color: var(--danger);
+    }
+
+    /* Mobile Bottom Navigation Bar */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-color);
+      z-index: 90;
+      padding: 0 4px;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .mob-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 6px 4px;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+      flex: 1;
+    }
+    .mob-nav-item i {
+      font-size: 18px;
+      transition: transform 0.2s ease;
+    }
+    .mob-nav-item.active,
+    .mob-nav-item:active {
+      color: var(--primary);
+    }
+    .mob-nav-item.active i {
+      transform: translateY(-2px);
+    }
+
     @media (max-width: 992px) {
       .pos-layout {
         grid-template-columns: 1fr;
@@ -1866,13 +2000,49 @@
         left: -100%;
         top: 0;
         bottom: 0;
-        box-shadow: var(--shadow-lg);
+        width: 290px;
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.4);
+        z-index: 100;
       }
       .sidebar.open-mobile {
         left: 0;
       }
+      .sidebar-close-btn {
+        display: flex;
+      }
       .mobile-menu-toggle {
-        display: block;
+        display: inline-flex;
+      }
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      .content-body {
+        padding-bottom: 84px !important;
+      }
+      .top-header {
+        padding: 0 12px;
+        gap: 8px;
+      }
+      .header-breadcrumb-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        max-width: 170px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .header-breadcrumb-sub {
+        display: none;
+      }
+      .hdr-btn {
+        padding: 0 10px;
+        font-size: 12px;
+      }
+      .hdr-btn span {
+        display: none;
+      }
+      .ticker-ribbon {
+        display: none;
       }
     }
   </style>
@@ -1889,6 +2059,9 @@
         <div class="brand-title">TFC GROUP</div>
         <div class="brand-subtitle"><i class="fas fa-cubes"></i> Enterprise Platform</div>
       </div>
+      <button class="sidebar-close-btn" onclick="closeMobileSidebar()" title="Close Navigation">
+        <i class="fas fa-xmark"></i>
+      </button>
     </div>
 
     <!-- Active Business Indicator -->
@@ -1968,7 +2141,7 @@
         <div class="sub-menu" id="subMenuFish">
           <button class="sub-item-btn" id="subBtn-fish-consignments" onclick="navigateSubMenu('fish', 'fish-consignments', 'Consignments & Mandi Sales', this)"><i class="fas fa-fish-fins"></i> Consignments & Mandi Sales</button>
           <button class="sub-item-btn" id="subBtn-fish-loss" onclick="navigateSubMenu('fish', 'fish-loss', 'Ice Tare & Deadloss Log', this)"><i class="fas fa-icicles"></i> Ice Tare & Deadloss Log</button>
-          <button class="sub-item-btn" id="subBtn-fish-fleet" onclick="navigateSubMenu('fish', 'fish-fleet', 'Cold Fleet & Route Toll', this)"><i class="fas fa-route"></i> Cold Fleet & Route Toll</button>
+          <button class="sub-item-btn" id="subBtn-fish-fleet" onclick="navigateSubMenu('fish', 'fish-fleet', 'Transport Fleet & Route Toll', this)"><i class="fas fa-route"></i> Transport Fleet & Route Toll</button>
           <button class="sub-item-btn" onclick="openModal('modalFishBatch')"><i class="fas fa-plus"></i> + New Consignment</button>
         </div>
       </div>
@@ -2053,17 +2226,25 @@
     </div>
   </aside>
 
+  <!-- Mobile Backdrop Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
   <!-- ================= MAIN APP CONTAINER ================= -->
   <main class="main-wrapper">
     
     <!-- Top Bar -->
     <header class="top-header">
       <div class="header-left">
-        <button class="mobile-menu-toggle" onclick="toggleMobileSidebar()">
+        <button class="mobile-menu-toggle" id="mobileMenuToggleBtn" onclick="toggleMobileSidebar()" title="Toggle Navigation Menu">
           <i class="fas fa-bars"></i>
         </button>
 
-        <div class="header-breadcrumb-badge">
+        <button class="header-back-btn" id="headerBackBtn" onclick="navigateBack()" title="Back to Previous Screen">
+          <i class="fas fa-arrow-left"></i>
+          <span>Back</span>
+        </button>
+
+        <div class="header-breadcrumb-badge" onclick="navigateToVerticalRoot()" style="cursor: pointer;" title="Back to Overview">
           <i class="fas fa-building" id="headerBizIcon"></i>
           <span id="headerBizTitle">Catering Management</span>
           <span class="header-breadcrumb-sub" id="headerSubTitle">Event Bookings</span>
@@ -2908,38 +3089,38 @@
         </div>
       </div>
 
-      <!-- 4.3 Fish Cold Fleet & Route Toll -->
+      <!-- 4.3 Fish Transport Fleet & Route Toll -->
       <div class="view-pane" id="pane-fish-fleet">
         <div class="dashboard-hero-banner">
           <div class="hero-welcome-left">
-            <h2><i class="fas fa-route" style="color: var(--fish-color);"></i> Cold Fleet Vehicles & Route Toll Log</h2>
-            <p>Insulated reefer van GPS logs, cabin chiller temperature telemetry (-4°C), and fast-tag toll expenditure.</p>
+            <h2><i class="fas fa-route" style="color: var(--fish-color);"></i> Transport Fleet, Trips & Route Toll Log</h2>
+            <p>Vehicle trip dispatches, driver logbooks, crate payload weights, and highway FASTag toll & fuel expense records.</p>
           </div>
-          <button class="hdr-btn primary-btn" onclick="Swal.fire('GPS Telemetry', 'All reefer units pinging normal (-4°C).', 'success')"><i class="fas fa-satellite-dish"></i> Telemetry Check</button>
+          <button class="hdr-btn primary-btn" onclick="openExpenseModal('Fish Transport')"><i class="fas fa-receipt"></i> + Log Trip & Toll Expense</button>
         </div>
 
-        <!-- Reefer Live Telemetry Gauges -->
+        <!-- Practical Fleet & Trip Summary Cards -->
         <div class="dial-gauge-container" style="margin-bottom: 20px;">
           <div class="dial-gauge-item">
-            <div class="dial-gauge-val" style="color: #0284c7;">-3.8°C</div>
-            <div class="dial-gauge-lbl">Reefer 1 Cabin Chiller</div>
-            <div style="font-size: 11px; color: var(--success); font-weight: 700;">● Active (NH-16 Highway)</div>
+            <div class="dial-gauge-val" style="color: #0284c7;">2 Vehicles</div>
+            <div class="dial-gauge-lbl">Active on Road</div>
+            <div style="font-size: 11px; color: var(--success); font-weight: 700;">● OD-02-FF-8811 & OD-05-TR-2200</div>
           </div>
           <div class="dial-gauge-item">
-            <div class="dial-gauge-val" style="color: #0284c7;">-4.2°C</div>
-            <div class="dial-gauge-lbl">Reefer 2 Cabin Chiller</div>
-            <div style="font-size: 11px; color: var(--success); font-weight: 700;">● Optimal (Cuttack Mandi)</div>
+            <div class="dial-gauge-val" style="color: var(--fish-color);">125 Crates</div>
+            <div class="dial-gauge-lbl">Total Fish Payload</div>
+            <div style="font-size: 11px; color: var(--text-muted); font-weight: 700;">3,795 Kg (Chilika & Kakatpur)</div>
           </div>
           <div class="dial-gauge-item">
             <div class="dial-gauge-val" style="color: var(--primary);">₹3,700</div>
             <div class="dial-gauge-lbl">Fastag Toll Expended</div>
-            <div style="font-size: 11px; color: var(--text-muted);">Govt Plaza Automated</div>
+            <div style="font-size: 11px; color: var(--text-muted);">Highway Plaza Receipts Verified</div>
           </div>
         </div>
 
         <div class="app-card">
           <div class="card-header">
-            <div class="card-title"><i class="fas fa-truck"></i> Active Cold Chain Vehicles</div>
+            <div class="card-title"><i class="fas fa-truck"></i> Transport Vehicles & Active Trip Register</div>
           </div>
           <div class="card-body" style="padding: 0;">
             <div class="table-responsive">
@@ -2947,17 +3128,17 @@
                 <thead>
                   <tr>
                     <th>Vehicle Number</th>
-                    <th>Driver Name</th>
+                    <th>Driver & Contact</th>
                     <th>Current Route</th>
-                    <th>Chiller Temp</th>
-                    <th>Fuel Advance</th>
-                    <th>Toll Charges</th>
+                    <th>Crates & Payload</th>
+                    <th>Diesel Advance</th>
+                    <th>FASTag Toll</th>
                     <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td><b>OD-02-FF-8811 (Reefer 1)</b></td><td>Bapi Jena</td><td>Chilika → Howrah Mandi (Kolkata)</td><td><b>-3.8°C</b></td><td>₹14,000</td><td>₹2,850</td><td><span class="pill info">In Transit (NH-16)</span></td></tr>
-                  <tr><td><b>OD-05-TR-2200 (Reefer 2)</b></td><td>Manoj Rout</td><td>Kakatpur Farm → Barabati Cuttack</td><td><b>-4.2°C</b></td><td>₹6,000</td><td>₹850</td><td><span class="pill success">Delivered & Closed</span></td></tr>
+                  <tr><td><b>OD-02-FF-8811 (Van 1)</b></td><td>Bapi Jena (+91 98765 43210)</td><td>Chilika → Howrah Mandi (Kolkata)</td><td><b>80 Crates (2,660 Kg)</b></td><td>₹14,000</td><td>₹2,850</td><td><span class="pill info">In Transit (NH-16)</span></td></tr>
+                  <tr><td><b>OD-05-TR-2200 (Van 2)</b></td><td>Manoj Rout (+91 94370 11223)</td><td>Kakatpur Farm → Barabati Cuttack</td><td><b>45 Crates (1,135 Kg)</b></td><td>₹6,000</td><td>₹850</td><td><span class="pill success">Delivered & Closed</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -3282,7 +3463,7 @@
 
           <div class="interactive-box" style="border-top: 4px solid #0284c7;">
             <div class="interactive-box-title">
-              <span>Shed C (Automated Brooding Shed)</span>
+              <span>Shed C (Brooding & Starter Shed)</span>
               <span class="pill info">Active Brooding</span>
             </div>
             <div style="font-size: 13.5px; margin-bottom: 8px;"><b>Batch #PLT-B105</b> • Ross 308 Day-Old Chicks</div>
@@ -3291,15 +3472,15 @@
               <span>Age: <b>12 Days</b></span>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px;">
-              <span>Avg Weight: <b>0.45 Kg</b></span>
-              <span>Temp: <b>31.5°C</b></span>
+              <span>Avg Body Weight: <b>0.45 Kg</b></span>
+              <span>Daily Feed: <b>14 Bags (Pre-Starter)</b></span>
             </div>
             <div class="stock-progress-bar">
               <div class="stock-progress-fill" style="width: 35%; background: #0284c7;"></div>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
               <span style="font-size: 11px; color: var(--text-muted);">Pre-Starter Phase</span>
-              <button class="tbl-action-btn" onclick="Swal.fire('Brooding Protocol', 'Infrared heaters & automatic nipple drinkers operating normal.', 'info')"><i class="fas fa-temperature-arrow-up"></i> Temp HUD</button>
+              <button class="tbl-action-btn" onclick="Swal.fire('Daily Brooding Care', 'Daily Checklist:\n• Drinker lines sanitized\n• 14 Bags Pre-Starter fed\n• Litter dry & raked\n• Natural heat curtains adjusted', 'info')"><i class="fas fa-clipboard-check"></i> Daily Protocol</button>
             </div>
           </div>
         </div>
@@ -4541,7 +4722,7 @@
     'construction-labor': { label: '+ Disburse Wages', action: disburseLaborWages },
     'fish-consignments': { label: '+ New Consignment', modal: 'modalFishBatch' },
     'fish-loss': { label: '+ Log Ice Tare', action: () => document.getElementById('calcCrates')?.focus() },
-    'fish-fleet': { label: '+ Cold Chain Check', action: () => Swal.fire('GPS Telemetry', 'Reefer Van 1 (-3.8°C) | Reefer Van 2 (-4.2°C) Running Normal.', 'success') },
+    'fish-fleet': { label: '+ Log Trip & Toll', action: () => openExpenseModal('Fish Transport') },
     'outlet-pos': { label: '+ Clear POS Cart', action: clearPOSCart },
     'outlet-bills': { label: '+ Print Last A4 Bill', action: openActiveA4Bill },
     'outlet-inventory': { label: '+ Add Product SKU', modal: 'modalAddProduct' },
@@ -4553,9 +4734,41 @@
     'group-expenses': { label: '+ Add Expense Voucher', modal: 'modalExpense' }
   };
 
+  let NAV_HISTORY = [];
+  let CURRENT_SUB_TITLE = 'Event Bookings & Schedule';
+
   window.addEventListener('DOMContentLoaded', () => {
     startLiveClock();
     loadInitialData();
+    updateHeaderBackButton();
+
+    // Browser / Mobile back button listener
+    window.addEventListener('popstate', (e) => {
+      const openModalEl = document.querySelector('.modal-wrapper.active');
+      if (openModalEl) {
+        openModalEl.classList.remove('active');
+        return;
+      }
+      const sidebar = document.getElementById('appSidebar');
+      if (sidebar && sidebar.classList.contains('open-mobile')) {
+        closeMobileSidebar();
+        return;
+      }
+      if (e.state && e.state.paneId) {
+        navigateSubMenu(e.state.bizKey, e.state.paneId, e.state.subTitle, null, true);
+      } else if (NAV_HISTORY.length > 0) {
+        navigateBack();
+      } else {
+        navigateSubMenu('hq', 'dashboard', 'Cross-Vertical P&L Dashboard', null, true);
+      }
+    });
+
+    // Keyboard ESC listener
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        navigateBack();
+      }
+    });
   });
 
   function startLiveClock() {
@@ -4602,10 +4815,20 @@
     if (!wasOpen) el.classList.add('open');
   }
 
-  // Navigate to specific sub menu
-  function navigateSubMenu(bizKey, paneId, subTitle, btnEl) {
+  // Navigate to specific sub menu with history tracking
+  function navigateSubMenu(bizKey, paneId, subTitle, btnEl, isBackAction = false) {
+    if (!isBackAction && ACTIVE_SUB_MENU && (ACTIVE_SUB_MENU !== paneId || ACTIVE_BUSINESS !== bizKey)) {
+      NAV_HISTORY.push({
+        bizKey: ACTIVE_BUSINESS,
+        paneId: ACTIVE_SUB_MENU,
+        subTitle: CURRENT_SUB_TITLE || ''
+      });
+      if (NAV_HISTORY.length > 30) NAV_HISTORY.shift();
+    }
+
     ACTIVE_BUSINESS = bizKey;
     ACTIVE_SUB_MENU = paneId;
+    CURRENT_SUB_TITLE = subTitle || '';
 
     const conf = BUSINESS_CONFIGS[bizKey] || BUSINESS_CONFIGS.catering;
 
@@ -4615,7 +4838,10 @@
     const hdrIcon = document.getElementById('headerBizIcon');
     if (hdrIcon) hdrIcon.className = `fas ${conf.icon}`;
     const hdrSub = document.getElementById('headerSubTitle');
-    if (hdrSub) hdrSub.innerText = subTitle;
+    if (hdrSub) hdrSub.innerText = subTitle || conf.name;
+
+    // Update Header Back Button
+    updateHeaderBackButton();
 
     // Update Banner in Sidebar
     const activeLbl = document.getElementById('activeBizLabel');
@@ -4642,8 +4868,100 @@
     const activeNavBtn = document.getElementById('navBtn-' + bizKey);
     if (activeNavBtn) activeNavBtn.classList.add('active');
 
+    // Update mobile bottom nav highlights
+    updateMobileBottomNav(bizKey, paneId);
+
     // Switch View Pane
     switchMainView(paneId, btnEl);
+
+    // Auto-close sidebar on mobile devices when selecting an item
+    if (window.innerWidth <= 992) {
+      closeMobileSidebar();
+    }
+
+    // Push URL hash for back/forward browser support
+    if (!isBackAction) {
+      try {
+        window.history.pushState({ bizKey, paneId, subTitle }, '', `#/${bizKey}/${paneId}`);
+      } catch (e) {}
+    }
+  }
+
+  function updateHeaderBackButton() {
+    const backBtn = document.getElementById('headerBackBtn');
+    if (!backBtn) return;
+    const isRootDashboard = ACTIVE_BUSINESS === 'hq' && ACTIVE_SUB_MENU === 'dashboard';
+    if (!isRootDashboard || NAV_HISTORY.length > 0) {
+      backBtn.classList.remove('hidden');
+    } else {
+      backBtn.classList.add('hidden');
+    }
+  }
+
+  function updateMobileBottomNav(bizKey, paneId) {
+    document.querySelectorAll('.mob-nav-item').forEach(el => el.classList.remove('active'));
+    if (bizKey === 'hq' && paneId === 'dashboard') {
+      document.getElementById('mobNavDashboard')?.classList.add('active');
+    } else if (paneId === 'khata-ledger') {
+      document.getElementById('mobNavKhata')?.classList.add('active');
+    }
+  }
+
+  // Universal Back Navigation Function (Used by header back, ESC, and mobile bottom bar)
+  function navigateBack() {
+    // 1. If any modal is open, close it first
+    const openModalEl = document.querySelector('.modal-wrapper.active');
+    if (openModalEl) {
+      openModalEl.classList.remove('active');
+      return;
+    }
+
+    // 2. If mobile sidebar is open, close it
+    const sidebar = document.getElementById('appSidebar');
+    if (sidebar && sidebar.classList.contains('open-mobile')) {
+      closeMobileSidebar();
+      return;
+    }
+
+    // 3. If navigation history exists, pop previous view
+    if (NAV_HISTORY.length > 0) {
+      const prev = NAV_HISTORY.pop();
+      navigateSubMenu(prev.bizKey, prev.paneId, prev.subTitle, null, true);
+      return;
+    }
+
+    // 4. If on another vertical, go to Consolidated HQ Dashboard
+    if (ACTIVE_BUSINESS !== 'hq' || ACTIVE_SUB_MENU !== 'dashboard') {
+      navigateSubMenu('hq', 'dashboard', 'Cross-Vertical P&L Dashboard', null, true);
+    }
+  }
+
+  function navigateToVerticalRoot() {
+    const conf = BUSINESS_CONFIGS[ACTIVE_BUSINESS];
+    if (conf) {
+      navigateSubMenu(ACTIVE_BUSINESS, conf.defaultPane, conf.name, null);
+    }
+  }
+
+  function toggleMobileSidebar() {
+    const sidebar = document.getElementById('appSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const toggleBtn = document.querySelector('.mobile-menu-toggle i');
+    if (!sidebar) return;
+    const isOpen = sidebar.classList.toggle('open-mobile');
+    if (overlay) overlay.classList.toggle('active', isOpen);
+    if (toggleBtn) {
+      toggleBtn.className = isOpen ? 'fas fa-xmark' : 'fas fa-bars';
+    }
+  }
+
+  function closeMobileSidebar() {
+    const sidebar = document.getElementById('appSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const toggleBtn = document.querySelector('.mobile-menu-toggle i');
+    if (sidebar) sidebar.classList.remove('open-mobile');
+    if (overlay) overlay.classList.remove('active');
+    if (toggleBtn) toggleBtn.className = 'fas fa-bars';
   }
 
   // Switch Main Content View Pane
@@ -6502,10 +6820,6 @@
     renderCharts();
   }
 
-  function toggleMobileSidebar() {
-    document.getElementById('appSidebar').classList.toggle('open-mobile');
-  }
-
   function getLocalDemoState() {
     return {
       khata: [
@@ -6592,6 +6906,30 @@
     };
   }
 </script>
+
+<!-- Mobile Bottom Navigation Bar -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav">
+  <button class="mob-nav-item active" id="mobNavDashboard" onclick="navigateSubMenu('hq', 'dashboard', 'Cross-Vertical P&L Dashboard', null)" title="Group Overview">
+    <i class="fas fa-chart-pie"></i>
+    <span>Overview</span>
+  </button>
+  <button class="mob-nav-item" id="mobNavBack" onclick="navigateBack()" title="Back to Previous Screen">
+    <i class="fas fa-arrow-left"></i>
+    <span>Back</span>
+  </button>
+  <button class="mob-nav-item" id="mobNavMenu" onclick="toggleMobileSidebar()" title="Open Verticals Menu">
+    <i class="fas fa-bars"></i>
+    <span>Verticals</span>
+  </button>
+  <button class="mob-nav-item" id="mobNavA4" onclick="openActiveA4Bill()" title="Generate Official A4 Bill">
+    <i class="fas fa-file-invoice"></i>
+    <span>A4 Bill</span>
+  </button>
+  <button class="mob-nav-item" id="mobNavKhata" onclick="navigateSubMenu('hq', 'khata-ledger', 'Master Customer/Vendor Khata', null)" title="Khata Ledger">
+    <i class="fas fa-book-bookmark"></i>
+    <span>Khata</span>
+  </button>
+</nav>
 
 </body>
 </html>
