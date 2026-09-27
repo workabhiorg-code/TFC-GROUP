@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "build": "node build.js",
+    "predeploy": "node build.js",
     "deploy": "wrangler deploy",
     "preview": "wrangler dev",
     "test": "node run_all_tests.js",
