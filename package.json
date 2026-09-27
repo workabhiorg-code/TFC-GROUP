@@ -1,15 +1,16 @@
 {
-  "name": "tfc-group-enterprise-platform",
+  "name": "tfc-group",
   "version": "1.3.0",
   "description": "TFC GROUP — Multi-Enterprise Resource & POS Platform (Fish Transport Flagship ERP, Pragati Outlet POS)",
   "main": "index.html",
   "scripts": {
+    "build": "node build.js",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev",
     "test": "node run_all_tests.js",
     "test:phase1": "node test_phase1.js",
     "test:phase2": "node test_phase2.js",
     "test:phase3": "node test_phase3.js",
-    "build": "echo 'Static build ready for Cloudflare Pages'",
-    "deploy:cloudflare": "npx wrangler pages deploy . --project-name tfc-group-erp",
     "clasp:push": "clasp push"
   },
   "keywords": [

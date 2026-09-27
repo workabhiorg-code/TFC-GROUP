@@ -48,19 +48,20 @@ git push -u origin main
 2. Select your GitHub repository (`tfc-group-erp`).
 3. Set the build configuration:
    - **Framework preset:** `None`
-   - **Build command:** *(leave empty or `npm run build`)*
-   - **Build output directory:** `.` *(or leave as root directory)*
-4. Click **Save and Deploy**. Cloudflare Pages will build and give you a live production URL (e.g. `https://tfc-group-erp.pages.dev`).
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+4. Click **Save and Deploy**. Cloudflare Pages will build and give you a live production URL (e.g. `https://tfc-group.pages.dev`).
 
 ---
 
-### Option B: Direct CLI Deployment to Cloudflare Pages (Instant)
+### Option B: Cloudflare Workers / Wrangler CLI Deployment
 
-You can deploy directly to Cloudflare Pages without a GitHub repository using Wrangler:
+You can deploy directly using Wrangler (which builds and deploys from `dist`):
 
 ```bash
-# Deploy the current folder directly
-npx wrangler pages deploy . --project-name tfc-group-erp
+# Build and deploy with Wrangler
+npm run build
+npx wrangler deploy
 ```
 
 ---
