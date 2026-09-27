@@ -7,6 +7,7 @@
     "build": "node build.js",
     "predeploy": "node build.js",
     "deploy": "wrangler deploy",
+    "deploy:pages": "wrangler pages deploy public --project-name tfc-group",
     "preview": "wrangler dev",
     "test": "node run_all_tests.js",
     "test:phase1": "node test_phase1.js",
